@@ -9,12 +9,12 @@ namespace Demo_Shop.Controllers
     public class ProductCategoryManagerController : Controller
     {
         // create the instance of the product category repository
-        ProductCategoryRepository context;
+        InMemoryRepository<ProductCategory> context;
 
         #region Constructor
         public ProductCategoryManagerController()
         {
-            context = new ProductCategoryRepository();
+            context = new InMemoryRepository<ProductCategory>();
         }
         #endregion
 

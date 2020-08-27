@@ -10,16 +10,16 @@ namespace Demo_Shop.Controllers
     public class ProductManagementController : Controller
     {
         //create the instance of the ProductRepository & ProductCategoryRepository
-        ProductRepository context;
+        InMemoryRepository<Product> context;
 
-        ProductCategoryRepository productCategories;
+        InMemoryRepository<ProductCategory> productCategories;
 
         #region Construtor
         public ProductManagementController()
         {
-            context = new ProductRepository();
+            context = new InMemoryRepository<Product>();
 
-            productCategories = new ProductCategoryRepository();
+            productCategories = new InMemoryRepository<ProductCategory>();
         }
         #endregion
 

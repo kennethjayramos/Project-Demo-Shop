@@ -1,13 +1,10 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Demo_Shop.Core.Models
 {
-    public class Product
+    public class Product : BaseEntity
     {
-        public string Id { get; set; }
-
         [StringLength(20)]
         [DisplayName("Product Name")]
         public string Name { get; set; }
@@ -20,12 +17,5 @@ namespace Demo_Shop.Core.Models
         public string Category { get; set; }
 
         public string Image { get; set; }
-
-        #region Constructor (Product Id)
-        public Product()
-        {
-            this.Id = Guid.NewGuid().ToString();
-        }
-        #endregion
     }
 }
