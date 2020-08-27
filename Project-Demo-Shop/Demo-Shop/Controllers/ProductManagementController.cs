@@ -1,4 +1,5 @@
 ﻿using Demo_Shop.Core.Models;
+using Demo_Shop.Core.ViewModels;
 using Demo_Shop.DataAccess.InMemory;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +9,17 @@ namespace Demo_Shop.Controllers
 {
     public class ProductManagementController : Controller
     {
-        //create the instance of the product repository
+        //create the instance of the ProductRepository & ProductCategoryRepository
         ProductRepository context;
+
+        ProductCategoryRepository productCategories;
 
         #region Construtor
         public ProductManagementController()
         {
             context = new ProductRepository();
+
+            productCategories = new ProductCategoryRepository();
         }
         #endregion
 
@@ -29,9 +34,13 @@ namespace Demo_Shop.Controllers
         // POST: ProductManagement
         public ActionResult Create()
         {
-            Product product = new Product();
+            ProductManagerViewModel viewModel = new ProductManagerViewModel();
 
-            return View(product);
+            viewModel.Product = new Product();
+
+            viewModel.ProductCategories = productCategories.Collection();
+
+            return View(viewModel);
         }
 
         // POST: Product
@@ -65,7 +74,13 @@ namespace Demo_Shop.Controllers
 
             else
             {
-                return View(productToEdit);
+                ProductManagerViewModel viewModel = new ProductManagerViewModel();
+
+                viewModel.Product = productToEdit;
+
+                viewModel.ProductCategories = productCategories.Collection();
+
+                return View(viewModel);
             }
         }
 
