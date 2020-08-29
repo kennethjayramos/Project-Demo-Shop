@@ -1,6 +1,7 @@
 using Demo_Shop.Core.Contracts;
 using Demo_Shop.Core.Models;
 using Demo_Shop.DataAccess.InMemory;
+using Demo_Shop.DataAccess.Sql;
 using System;
 
 using Unity;
@@ -45,8 +46,8 @@ namespace Demo_Shop
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
-            container.RegisterType<IRepository<Product>, InMemoryRepository<Product>>();
-            container.RegisterType<IRepository<ProductCategory>, InMemoryRepository<ProductCategory>>();
+            container.RegisterType<IRepository<Product>, SqlRepository<Product>>();
+            container.RegisterType<IRepository<ProductCategory>, SqlRepository<ProductCategory>>();
         }
     }
 }
