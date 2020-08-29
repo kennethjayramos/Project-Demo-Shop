@@ -1,4 +1,5 @@
-﻿using Demo_Shop.Core.Models;
+﻿using Demo_Shop.Core.Contracts;
+using Demo_Shop.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Runtime.Caching;
 
 namespace Demo_Shop.DataAccess.InMemory
 {
-    public class InMemoryRepository<T> where T : BaseEntity
+    public class InMemoryRepository<T> : IRepository<T> where T : BaseEntity
     {
         ObjectCache cache = MemoryCache.Default;
 
@@ -61,7 +62,7 @@ namespace Demo_Shop.DataAccess.InMemory
         {
             T tToFind = items.Find(i => i.Id == id);
 
-            if (tToFind !=null)
+            if (tToFind != null)
             {
                 return tToFind;
             }

@@ -1,6 +1,6 @@
-﻿using Demo_Shop.Core.Models;
+﻿using Demo_Shop.Core.Contracts;
+using Demo_Shop.Core.Models;
 using Demo_Shop.Core.ViewModels;
-using Demo_Shop.DataAccess.InMemory;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -10,16 +10,16 @@ namespace Demo_Shop.Controllers
     public class ProductManagementController : Controller
     {
         //create the instance of the ProductRepository & ProductCategoryRepository
-        InMemoryRepository<Product> context;
+        IRepository<Product> context;
 
-        InMemoryRepository<ProductCategory> productCategories;
+        IRepository<ProductCategory> productCategories;
 
         #region Construtor
-        public ProductManagementController()
+        public ProductManagementController(IRepository<Product> productContext, IRepository<ProductCategory> productCategoryContext)
         {
-            context = new InMemoryRepository<Product>();
+            context = productContext;
 
-            productCategories = new InMemoryRepository<ProductCategory>();
+            productCategories = productCategoryContext;
         }
         #endregion
 
