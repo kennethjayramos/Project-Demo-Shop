@@ -1,30 +1,47 @@
-﻿using System;
+﻿using Demo_Shop.Core.Contracts;
+using Demo_Shop.Core.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Demo_Shop.Controllers
 {
     public class HomeController : Controller
     {
+        //create the instance of the ProductRepository & ProductCategoryRepository
+        IRepository<Product> context;
+
+        IRepository<ProductCategory> productCategories;
+
+        #region Construtor
+        public HomeController(IRepository<Product> productContext, IRepository<ProductCategory> productCategoryContext)
+        {
+            context = productContext;
+
+            productCategories = productCategoryContext;
+        }
+        #endregion
+
         public ActionResult Index()
         {
-            return View();
+            List<Product> products = context.Collection().ToList();
+
+            return View(products);
         }
 
-        public ActionResult About()
+        public ActionResult Details(string Id)
         {
-            ViewBag.Message = "Your application description page.";
+            Product product = context.Find(Id);
 
-            return View();
-        }
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            else
+            {
+                return View(product);
+            }
         }
     }
 }
