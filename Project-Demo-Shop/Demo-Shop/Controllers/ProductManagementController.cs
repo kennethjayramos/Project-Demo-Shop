@@ -2,7 +2,9 @@
 using Demo_Shop.Core.Models;
 using Demo_Shop.Core.ViewModels;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Demo_Shop.Controllers
@@ -45,7 +47,7 @@ namespace Demo_Shop.Controllers
 
         // POST: Product
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult Create(Product product, HttpPostedFileBase image)
         {
             if(!ModelState.IsValid)
             {
@@ -54,6 +56,20 @@ namespace Demo_Shop.Controllers
 
             else
             {
+                if (image != null && image.ContentLength > 0)
+                {
+                    string uploadPath = Server.MapPath("~/ProductImages/");
+
+                    if (!Directory.Exists(uploadPath))
+                    {
+                        Directory.CreateDirectory(uploadPath);
+                    }
+
+                    product.Image = product.Id + Path.GetExtension(image.FileName);
+
+                    image.SaveAs(uploadPath + product.Image);
+                }
+
                 context.Insert(product);
 
                 context.Commit();
@@ -86,7 +102,7 @@ namespace Demo_Shop.Controllers
 
         // PUT: Product
         [HttpPost]
-        public ActionResult Edit(Product product, string id)
+        public ActionResult Edit(Product product, string id, HttpPostedFileBase image)
         {
             Product productToEdit = context.Find(id);
 
@@ -104,11 +120,33 @@ namespace Demo_Shop.Controllers
 
                 else
                 {
+                    if (image != null && image.ContentLength > 0)
+                    {
+                        string uploadPath = Server.MapPath("~/ProductImages/");
+
+                        if (!Directory.Exists(uploadPath))
+                        {
+                            Directory.CreateDirectory(uploadPath);
+                        }
+
+                        else
+                        {
+                            if (productToEdit.Image != null)
+                            {
+                                var oldImage = Request.MapPath("~/ProductImages/" + productToEdit.Image);
+
+                                System.IO.File.Delete(oldImage);
+                            }                            
+
+                            productToEdit.Image = product.Id + Path.GetExtension(image.FileName);
+
+                            image.SaveAs(uploadPath + productToEdit.Image);
+                        }                        
+                    }
+
                     productToEdit.Category = product.Category;
 
                     productToEdit.Description = product.Description;
-
-                    productToEdit.Image = product.Image;
 
                     productToEdit.Name = product.Name;
 
@@ -151,6 +189,13 @@ namespace Demo_Shop.Controllers
 
             else
             {
+                if (productToDelete.Image != null)
+                {
+                    var productImage = Request.MapPath("~/ProductImages/" + productToDelete.Image);
+
+                    System.IO.File.Delete(productImage);
+                }
+
                 context.Delete(id);
 
                 context.Commit();
