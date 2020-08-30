@@ -1,5 +1,6 @@
 ﻿using Demo_Shop.Core.Contracts;
 using Demo_Shop.Core.Models;
+using Demo_Shop.Core.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -22,11 +23,29 @@ namespace Demo_Shop.Controllers
         }
         #endregion
 
-        public ActionResult Index()
+        public ActionResult Index(string Category = null)
         {
-            List<Product> products = context.Collection().ToList();
+            List<Product> products;
 
-            return View(products);
+            List<ProductCategory> categories = productCategories.Collection().ToList();
+
+            if (Category == null)
+            {
+                products = context.Collection().ToList();
+            }
+
+            else
+            {
+                products = context.Collection().Where(p => p.Category == Category).ToList();
+            }
+
+            ProductFilterViewModel model = new ProductFilterViewModel();
+
+            model.Products = products;
+
+            model.ProductCategories = categories;
+
+            return View(model);
         }
 
         public ActionResult Details(string Id)

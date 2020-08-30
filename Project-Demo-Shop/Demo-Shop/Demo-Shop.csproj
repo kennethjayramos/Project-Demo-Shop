@@ -196,6 +196,7 @@
     <Compile Include="Core\Models\BaseEntity.cs" />
     <Compile Include="Core\Models\Product.cs" />
     <Compile Include="Core\Models\ProductCategory.cs" />
+    <Compile Include="Core\ViewModels\ProductFilterViewModel.cs" />
     <Compile Include="Core\ViewModels\ProductManagerViewModel.cs" />
     <Compile Include="DataAccess\InMemory\InMemoryRepository.cs" />
     <Compile Include="Core\Contracts\IRepository.cs" />
