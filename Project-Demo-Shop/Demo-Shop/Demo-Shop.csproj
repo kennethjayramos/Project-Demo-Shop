@@ -194,6 +194,8 @@
     <Compile Include="Controllers\ProductCategoryManagerController.cs" />
     <Compile Include="Controllers\ProductManagementController.cs" />
     <Compile Include="Core\Models\BaseEntity.cs" />
+    <Compile Include="Core\Models\Basket.cs" />
+    <Compile Include="Core\Models\BasketItem.cs" />
     <Compile Include="Core\Models\Product.cs" />
     <Compile Include="Core\Models\ProductCategory.cs" />
     <Compile Include="Core\ViewModels\ProductFilterViewModel.cs" />
@@ -213,6 +215,10 @@
     <Compile Include="ProductDataContextMigrations\202008291055386_InitialDbSet.cs" />
     <Compile Include="ProductDataContextMigrations\202008291055386_InitialDbSet.Designer.cs">
       <DependentUpon>202008291055386_InitialDbSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductDataContextMigrations\202008310632284_AddedBasketModels.cs" />
+    <Compile Include="ProductDataContextMigrations\202008310632284_AddedBasketModels.Designer.cs">
+      <DependentUpon>202008310632284_AddedBasketModels.cs</DependentUpon>
     </Compile>
     <Compile Include="ProductDataContextMigrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -303,6 +309,9 @@
   <ItemGroup>
     <EmbeddedResource Include="ProductDataContextMigrations\202008291055386_InitialDbSet.resx">
       <DependentUpon>202008291055386_InitialDbSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductDataContextMigrations\202008310632284_AddedBasketModels.resx">
+      <DependentUpon>202008310632284_AddedBasketModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
