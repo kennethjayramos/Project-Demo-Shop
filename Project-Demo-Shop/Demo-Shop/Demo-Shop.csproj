@@ -198,6 +198,8 @@
     <Compile Include="Core\Models\BasketItem.cs" />
     <Compile Include="Core\Models\Product.cs" />
     <Compile Include="Core\Models\ProductCategory.cs" />
+    <Compile Include="Core\ViewModels\BasketItemViewModel.cs" />
+    <Compile Include="Core\ViewModels\BasketSummaryViewModel.cs" />
     <Compile Include="Core\ViewModels\ProductFilterViewModel.cs" />
     <Compile Include="Core\ViewModels\ProductManagerViewModel.cs" />
     <Compile Include="DataAccess\InMemory\InMemoryRepository.cs" />
@@ -223,6 +225,7 @@
     <Compile Include="ProductDataContextMigrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BasketService.cs" />
+    <Compile Include="Core\Contracts\IBasketService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
