@@ -8,7 +8,7 @@ namespace Demo_Shop.Services
     {
         void AddToBasket(HttpContextBase httpContext, string productId);
 
-        List<BasketItemViewModel> GetBasketItem(HttpContextBase httpContext);
+        List<BasketItemViewModel> GetBasketItems(HttpContextBase httpContext);
 
         BasketSummaryViewModel GetBasketSummary(HttpContextBase httpContext);
 

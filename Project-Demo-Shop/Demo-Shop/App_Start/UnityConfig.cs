@@ -1,7 +1,7 @@
 using Demo_Shop.Core.Contracts;
 using Demo_Shop.Core.Models;
-using Demo_Shop.DataAccess.InMemory;
 using Demo_Shop.DataAccess.Sql;
+using Demo_Shop.Services;
 using System;
 
 using Unity;
@@ -48,6 +48,9 @@ namespace Demo_Shop
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<IRepository<Product>, SqlRepository<Product>>();
             container.RegisterType<IRepository<ProductCategory>, SqlRepository<ProductCategory>>();
+            container.RegisterType<IRepository<Basket>, SqlRepository<Basket>>();
+            container.RegisterType<IRepository<BasketItem>, SqlRepository<BasketItem>>();
+            container.RegisterType<IBasketService, BasketService>();
         }
     }
 }

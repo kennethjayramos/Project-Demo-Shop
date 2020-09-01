@@ -35,7 +35,7 @@ namespace Demo_Shop.Services
             {
                 string basketId = cookie.Value;
 
-                if (string.IsNullOrEmpty(basketId))
+                if (!string.IsNullOrEmpty(basketId))
                 {
                     basket = basketContext.Find(basketId);
                 }
@@ -121,7 +121,7 @@ namespace Demo_Shop.Services
             }
         }
 
-        public List<BasketItemViewModel> GetBasketItem(HttpContextBase httpContext)
+        public List<BasketItemViewModel> GetBasketItems(HttpContextBase httpContext)
         {
             // Get the basket from the db
             Basket basket = GetBasket(httpContext, false);
